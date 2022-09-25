@@ -4,46 +4,46 @@ import { useEffect, useMemo, useState } from "react";
 import "./styles.css";
 
 export default function App() {
-  const [num, setNum] = useState(2);
-  const [theme, setTheme] = useState(false);
+    const [num, setNum] = useState(2);
+    const [theme, setTheme] = useState(false);
 
-  const memoized = useMemo(() => {
-    return slowFunc(num);
-  }, [num]);
+    const memoized = useMemo(() => {
+        return slowFunc(num);
+    }, [num]);
 
-  //with every re-render, new themeStyle object will be created, with a fresh new refrence
-  // const themeStyle = {
-  //   backgroundColor: theme ? "black" : "white",
-  //   color: theme ? "white" : "black"
-  // };
+//with every re-render, new themeStyle object will be created, with a fresh new refrence
+// const themeStyle = {
+//   backgroundColor: theme ? "black" : "white",
+//   color: theme ? "white" : "black"
+// };
 
-  const memoizedTheme = useMemo(() => {
-    return {
-      backgroundColor: theme ? "black" : "white",
-      color: theme ? "white" : "black"
-    };
-  }, [theme]);
+    const memoizedTheme = useMemo(() => {
+        return {
+            backgroundColor: theme ? "black" : "white",
+            color: theme ? "white" : "black"
+        };
+    }, [theme]);
 
-  //refrential equality
-  useEffect(() => {
-    console.log("Theme changed");
-  }, [memoizedTheme]);
+    //refrential equality
+    useEffect(() => {
+        console.log("Theme changed");
+    }, [memoizedTheme]);
 
-  return (
-    <div className="App">
-      <h1>Interview questions</h1>
-      <input type="number" onChange={(e) => setNum(e.target.value)} />
+    return (
+        <div className="App">
+            <h1>Interview questions</h1>
+            <input type="number" onChange={(e) => setNum(e.target.value)} />
 
-      <button onClick={() => setTheme(!theme)}>Theme</button>
-      <div style={memoizedTheme}>{memoized}</div>
-    </div>
-  );
+            <button onClick={() => setTheme(!theme)}>Theme</button>
+            <div style={memoizedTheme}>{memoized}</div>
+        </div>
+    );
 }
 
 const slowFunc = (num) => {
-  //heavy computations...
-  console.log(num * 2);
-  return num * 2;
+    //heavy computations...
+    console.log(num * 2);
+    return num * 2;
 };
 
 

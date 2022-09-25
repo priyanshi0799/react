@@ -5,41 +5,41 @@ import { List } from "./List";
 import "./styles.css";
 
 export default function App() {
-  const [num, setNum] = useState(1);
-  const [theme, setTheme] = useState(false);
+    const [num, setNum] = useState(1);
+    const [theme, setTheme] = useState(false);
 
-  const themeStyle = {
-    backgroundColor: theme ? "white" : "black",
-    color: theme ? "black" : "white"
-  };
+    const themeStyle = {
+        backgroundColor: theme ? "white" : "black",
+        color: theme ? "black" : "white"
+    };
 
-  //getting recreated with every re-render
-  // const showItemsSlow = () => {
-  //   console.log("Hii");
-  //   return [num, num + 1, num + 2];
-  // };
+//getting recreated with every re-render
+// const showItemsSlow = () => {
+//   console.log("Hii");
+//   return [num, num + 1, num + 2];
+// };
 
-  const showItemsFast = useCallback((param) => {
-    console.log("Hii from useCallback");
-    return [num, num + 1, num + 2];
-  }, [num]);
+    const showItemsFast = useCallback((param) => {
+        console.log("Hii from useCallback");
+        return [num, num + 1, num + 2];
+    }, [num]);
 
-  return (
-    <div className="App">
-      <h1>Learn useCallback with me</h1>
+    return (
+        <div className="App">
+            <h1>Learn useCallback with me</h1>
 
-      <br />
-      <input
-        type="number"
-        value={num}
-        onChange={(e) => setNum(e.target.value)}
-      />
-      <br />
-      <div style={themeStyle}>{num}</div>
-      <button onClick={() => setTheme(!theme)}>Change Theme</button>
-      <List showList={showItemsFast} />
-    </div>
-  );
+            <br />
+            <input
+                type="number"
+                value={num}
+                onChange={(e) => setNum(e.target.value)}
+            />
+            <br />
+            <div style={themeStyle}>{num}</div>
+            <button onClick={() => setTheme(!theme)}>Change Theme</button>
+            <List showList={showItemsFast} />
+        </div>
+    );
 }
 
 
